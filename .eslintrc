@@ -8,6 +8,11 @@ env:
   es2017: true
   browser: true
 
+rules:
+  quotes: [1, "single"]
+  no-unused-vars: warn
+  no-console: warn
+
 globals:
   _: readonly
   L: readonly
