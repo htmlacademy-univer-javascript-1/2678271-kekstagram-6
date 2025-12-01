@@ -20,7 +20,6 @@ export const NAMES = [
 ];
 
 export const OBJECTS_COUNT = 25;
-
 export const MAX_PHOTO_ID = 25;
 export const MAX_AVATAR_ID = 6;
 
