@@ -1,5 +1,4 @@
-import {createPhotoData, OBJECTS_COUNT} from './data.js';
+import {createPictures} from './data.js';
+import './pictures.js';
 
-const photoArray = Array.from({ length: OBJECTS_COUNT }, createPhotoData);
-
-console.log(photoArray);
+console.log(createPictures());

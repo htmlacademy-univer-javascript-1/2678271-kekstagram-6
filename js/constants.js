@@ -24,7 +24,7 @@ export const OBJECTS_COUNT = 25;
 export const MAX_PHOTO_ID = 25;
 export const MAX_AVATAR_ID = 6;
 
-export const MAX_COMMENTS_COUNT = 30;
+export const MAX_COMMENTS_СOUNT = 30;
 
 export const MIN_LIKES = 15;
 export const MAX_LIKES = 200;
