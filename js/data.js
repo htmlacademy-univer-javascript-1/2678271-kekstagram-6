@@ -1,12 +1,10 @@
 import {getRandomInteger, createRandomIdFromRangeGenerator} from './util.js';
-import { COMMENT_MESSAGES, NAMES, OBJECTS_COUNT } from './constants.js';
-import {
-  MAX_PHOTO_ID,
+import { COMMENT_MESSAGES, NAMES, OBJECTS_COUNT, MAX_PHOTO_ID,
   MAX_AVATAR_ID,
   MAX_COMMENTS_СOUNT,
   MIN_LIKES,
-  MAX_LIKES
-} from './data/constants.js';
+  MAX_LIKES } from './constants.js';
+
 
 let lastCommentId = 0;
 
@@ -55,5 +53,8 @@ const createPhotoData = () => {
   };
 };
 
-export {createPhotoData, OBJECTS_COUNT};
+export const createPictures = function () {
+  return Array.from({ length: OBJECTS_COUNT }, createPhotoData);
+};
+
 
