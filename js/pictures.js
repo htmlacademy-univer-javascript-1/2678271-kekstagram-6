@@ -1,4 +1,6 @@
 import {createPictures} from './data.js';
+import {openBigPicture} from './big-picture.js';
+
 
 export function renderPictures() {
   const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -6,6 +8,7 @@ export function renderPictures() {
   const similarListFragment = document.createDocumentFragment();
 
   const similarPictures = createPictures();
+
 
   similarPictures.forEach(({url, description, likes, comments}) => {
     const pictureElement = pictureTemplate.cloneNode(true);
@@ -16,9 +19,12 @@ export function renderPictures() {
     pictureElement.querySelector('.picture__likes').textContent = likes;
     pictureElement.querySelector('.picture__comments').textContent = comments.length;
 
+    pictureElement.addEventListener('click', () => {
+      openBigPicture({url, description, likes, comments});
+    });
+
     similarListFragment.appendChild(pictureElement);
   });
 
   picturesBlock.appendChild(similarListFragment);
 }
-
