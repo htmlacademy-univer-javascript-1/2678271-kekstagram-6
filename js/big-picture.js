@@ -15,21 +15,7 @@ function onDocumentKeydown(evt) {
   }
 }
 
-export function openBigPicture({url, description, likes, comments}) {
-  bigPicture.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-
-  bigPictureImg.src = url;
-  bigPictureImg.alt = description;
-
-  likesCount.textContent = likes;
-  commentsCount.textContent = comments.length;
-
-  caption.textContent = description;
-
-  commentCountBlock.classList.add('hidden');
-  commentsLoader.classList.add('hidden');
-
+function renderComments(comments) {
   const fragment = document.createDocumentFragment();
   commentsList.innerHTML = '';
 
@@ -46,6 +32,24 @@ export function openBigPicture({url, description, likes, comments}) {
   });
 
   commentsList.appendChild(fragment);
+}
+
+export function openBigPicture({url, description, likes, comments}) {
+  bigPicture.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+
+  bigPictureImg.src = url;
+  bigPictureImg.alt = description;
+
+  likesCount.textContent = likes;
+  commentsCount.textContent = comments.length;
+
+  caption.textContent = description;
+
+  commentCountBlock.classList.add('hidden');
+  commentsLoader.classList.add('hidden');
+
+  renderComments(comments);
 
   document.addEventListener('keydown', onDocumentKeydown);
 }
@@ -57,3 +61,4 @@ function closeBigPicture() {
 }
 
 closeBtn.addEventListener('click', closeBigPicture);
+
