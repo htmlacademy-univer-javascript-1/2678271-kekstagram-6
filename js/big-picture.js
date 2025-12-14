@@ -8,6 +8,8 @@ const closeBtn = bigPicture.querySelector('.big-picture__cancel');
 const commentCountBlock = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 
+const COMMENTS_PER_PORTION = 5;
+
 function onDocumentKeydown(evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
@@ -16,7 +18,7 @@ function onDocumentKeydown(evt) {
 }
 
 function renderMoreComments(comments, fragment, position) {
-  let end = position + 5;
+  let end = position + COMMENTS_PER_PORTION;
 
   if(comments.length < end){
     end = comments.length;
@@ -48,11 +50,14 @@ function renderCommentsFragment(comments) {
   renderMoreComments(comments, fragment, 0);
 
   let counter = 0;
-  commentsLoader.addEventListener('click', () => {
-    counter += 5;
+  const onClickLoadMore = () => {
+    counter += COMMENTS_PER_PORTION;
     renderMoreComments(comments, fragment, counter);
+  };
 
-  });
+
+  commentsLoader.removeEventListener('click', onClickLoadMore);
+  commentsLoader.addEventListener('click', onClickLoadMore);
 }
 
 
