@@ -1,3 +1,4 @@
+import {pristine} from './prestine-validator.js'
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const uploadInput = document.querySelector('.img-upload__input');
@@ -31,3 +32,8 @@ function closeUploadForm() {
 
 uploadInput.addEventListener('change', openUploadForm);
 uploadCancelBtn.addEventListener('click', closeUploadForm);
+
+uploadForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  pristine.validate();
+});
