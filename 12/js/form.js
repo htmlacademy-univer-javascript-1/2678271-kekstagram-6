@@ -35,5 +35,9 @@ uploadCancelBtn.addEventListener('click', closeUploadForm);
 
 uploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  pristine.validate();
+  const isValid = pristine.validate();
+
+  if (!isValid) {
+    return;
+  }
 });
