@@ -56,6 +56,9 @@ function renderCommentsFragment(comments) {
     commentsLoader.classList.add('hidden');
     commentCountBlock.classList.add('hidden');
     return;
+  }else{
+    commentsLoader.classList.remove('hidden');
+    commentCountBlock.classList.remove('hidden');
   }
 
   renderMoreComments(comments, fragment, 0);
