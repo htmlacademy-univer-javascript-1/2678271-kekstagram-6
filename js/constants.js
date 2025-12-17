@@ -30,3 +30,10 @@ export const MIN_LIKES = 15;
 export const MAX_LIKES = 200;
 
 export const COMMENTS_PER_PORTION = 5;
+
+export const MAX_TAG_COUNT = 5;
+export const MAX_COMMENT_LENGTH = 140;
+
+export const HASHTAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
+
+
