@@ -35,8 +35,7 @@ function validateHashtagFormat(value) {
     return true;
   }
 
-  const pattern = HASHTAG_PATTERN;
-  return parseHashtags(value).every((tag) => pattern.test(tag));
+  return parseHashtags(value).every((tag) => HASHTAG_PATTERN.test(tag));
 }
 
 
