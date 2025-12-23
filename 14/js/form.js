@@ -1,7 +1,6 @@
 import {pristine} from './prestine-validator.js';
 import {sendData} from './api.js';
-import { showSuccessModal } from './success-modal.js';
-import { showErrorModal } from './error-modal.js';
+import { showModal } from './modal.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
@@ -17,6 +16,10 @@ function onDocumentKeydown(evt) {
   }
 
   if (document.activeElement === hashtagInput || document.activeElement === commentInput) {
+    return;
+  }
+
+  if (!document.querySelector('.error.hidden')) {
     return;
   }
 
@@ -50,12 +53,12 @@ uploadInput.addEventListener('change', openUploadForm);
 uploadCancelBtn.addEventListener('click', closeUploadForm);
 
 const showFormError = function () {
-  showErrorModal();
+  showModal('.error', '.error__button');
 };
 
 const showFormSuccess = function(){
   closeUploadForm();
-  showSuccessModal();
+  showModal('.success', '.success__button');
 };
 
 export const setUserFormSubmit = (onSuccess, onFail) => {
@@ -65,7 +68,7 @@ export const setUserFormSubmit = (onSuccess, onFail) => {
 
     if (isValid) {
       const formData = new FormData(evt.target);
-      sendData(formData).then(onSuccess).catch((error) => onFail(error));
+      sendData(formData).then(onSuccess).catch(onFail);
     }
   });
 };

@@ -36,4 +36,5 @@ export const MAX_COMMENT_LENGTH = 140;
 
 export const HASHTAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
 
+export const GET_DATA_ERROR_MSG = 'Не удалось загрузить данные. Попробуйте обновить страницу';
 
