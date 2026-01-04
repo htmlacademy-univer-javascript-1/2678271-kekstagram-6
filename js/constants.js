@@ -38,3 +38,6 @@ export const HASHTAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
 
 export const GET_DATA_ERROR_MSG = 'Не удалось загрузить данные. Попробуйте обновить страницу';
 
+export const RANDOM_PHOTOS_COUNT = 10;
+
+export const DEBOUNCE_DELAY = 500;
