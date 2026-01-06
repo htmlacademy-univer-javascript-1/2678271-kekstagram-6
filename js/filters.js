@@ -5,18 +5,10 @@ const default_ = document.querySelector('#filter-default');
 const random = document.querySelector('#filter-random');
 const discussed = document.querySelector('#filter-discussed');
 
-function offPrevBtn(){
-
-  if (default_.classList.contains('img-filters__button--active')){
-    default_.classList.remove('img-filters__button--active');
-  }
-  if (random.classList.contains('img-filters__button--active')){
-    random.classList.remove('img-filters__button--active');
-  }
-  if (discussed.classList.contains('img-filters__button--active')){
-
-    discussed.classList.remove('img-filters__button--active');
-  }
+function offPrevBtn() {
+  [default_, random, discussed].forEach((btn) =>
+    btn.classList.remove('img-filters__button--active')
+  );
 }
 
 function btnToActive(btnName){
@@ -50,11 +42,11 @@ export const setDiscussed = (pictures, cb) => {
     btnToActive(discussed);
     const picturesCopy = pictures.slice();
 
-    cb(picturesCopy.sort(compare));
+    cb(picturesCopy.sort(compareByCommentsCount));
   });
 };
 
-function compare(a, b) {
+function compareByCommentsCount(a, b) {
   return b.comments.length - a.comments.length;
 }
 
