@@ -104,4 +104,15 @@ export const setUserFormSubmit = (onSuccess, onFail) => {
   });
 };
 
+hashtagInput.addEventListener('input', () => {
+  pristine.validate();
+  submitButton.disabled = !pristine.validate();
+});
+
+commentInput.addEventListener('input', () => {
+  pristine.validate();
+  submitButton.disabled = !pristine.validate();
+});
+
+
 setUserFormSubmit(showFormSuccess, showFormError);
