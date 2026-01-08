@@ -41,3 +41,7 @@ export const GET_DATA_ERROR_MSG = 'Не удалось загрузить дан
 export const RANDOM_PHOTOS_COUNT = 10;
 
 export const DEBOUNCE_DELAY = 500;
+
+export const SCALE_STEP = 25;
+export const SCALE_MIN = 25;
+export const SCALE_MAX = 100;
