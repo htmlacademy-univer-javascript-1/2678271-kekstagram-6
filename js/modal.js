@@ -1,7 +1,8 @@
-export const showModal = (modalSelector, buttonSelector) => {
+export const showModal = (templateId) => {
+  const template = document.querySelector(`#${templateId}`);
+  const modal = template.content.cloneNode(true).querySelector('section');
+  const button = modal.querySelector('button');
 
-  const modal = document.querySelector(modalSelector);
-  const button = modal.querySelector(buttonSelector);
 
   const onKeydown = (evt) => {
     if (evt.key !== 'Escape') {
@@ -19,13 +20,13 @@ export const showModal = (modalSelector, buttonSelector) => {
   };
 
   function closeModal() {
-    modal.classList.add('hidden');
+    modal.remove();
     document.removeEventListener('keydown', onKeydown);
     modal.removeEventListener('click', onOverlayClick);
     button.removeEventListener('click', closeModal);
   }
 
-  modal.classList.remove('hidden');
+  document.body.appendChild(modal);
   document.addEventListener('keydown', onKeydown);
   modal.addEventListener('click', onOverlayClick);
   button.addEventListener('click', closeModal);

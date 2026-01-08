@@ -78,12 +78,12 @@ uploadInput.addEventListener('change', openUploadForm);
 uploadCancelBtn.addEventListener('click', closeUploadForm);
 
 const showFormError = function () {
-  showModal('.error', '.error__button');
+  showModal('error');
 };
 
 const showFormSuccess = function(){
   closeUploadForm();
-  showModal('.success', '.success__button');
+  showModal('success');
 };
 
 const submitButton = uploadForm.querySelector('.img-upload__submit');
