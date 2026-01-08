@@ -1420,4 +1420,12 @@ main {
   text-align: center;
 }
 
+.text__hashtags + .pristine-error {
+  display: block;
+  position: relative;
+  margin-top: 4px;
+  pointer-events: none; 
+}
+
+
 
