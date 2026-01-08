@@ -42,7 +42,7 @@ function renderMoreComments(comments, fragment, position) {
   }
 
   commentCountBlock.innerHTML = `
-    ${end} из <span class="comments-count">${comments.length}</span> комментариев
+    <span class="social__comment-shown-count">${end}</span> из <span class="social__comment-total-count">${comments.length}</span> комментариев
     `;
   commentsList.appendChild(fragment);
 }
