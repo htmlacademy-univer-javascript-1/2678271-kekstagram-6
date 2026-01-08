@@ -61,14 +61,20 @@ const showFormSuccess = function(){
   showModal('.success', '.success__button');
 };
 
+const submitButton = uploadForm.querySelector('.img-upload__submit');
+
 export const setUserFormSubmit = (onSuccess, onFail) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
 
+    submitButton.disabled = true;
+
     if (isValid) {
       const formData = new FormData(evt.target);
-      sendData(formData).then(onSuccess).catch(onFail);
+      sendData(formData).then(onSuccess).catch(onFail).finally(() => {
+        submitButton.disabled = false;
+      });
     }
   });
 };
