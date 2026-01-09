@@ -1,6 +1,7 @@
 import {pristine} from './prestine-validator.js';
 import {sendData} from './api.js';
 import { showModal } from './modal.js';
+import { SCALE_STEP, SCALE_MIN, SCALE_MAX } from './constants.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
@@ -8,6 +9,30 @@ const uploadInput = document.querySelector('.img-upload__input');
 const uploadCancelBtn = document.querySelector('.img-upload__cancel');
 const hashtagInput = uploadForm.querySelector('.text__hashtags');
 const commentInput = uploadForm.querySelector('.text__description');
+
+const smallControl = document.querySelector('.scale__control--smaller');
+const bigControl = document.querySelector('.scale__control--bigger');
+const scaleValue = document.querySelector('.scale__control--value');
+
+function getScale() {
+  return parseInt(scaleValue.value, 10);
+}
+
+function setScale(value) {
+  scaleValue.value = `${value}%`;
+}
+
+smallControl.addEventListener('click', () => {
+  let current = getScale();
+  current = Math.max(SCALE_MIN, current - SCALE_STEP);
+  setScale(current);
+});
+
+bigControl.addEventListener('click', () => {
+  let current = getScale();
+  current = Math.min(SCALE_MAX, current + SCALE_STEP);
+  setScale(current);
+});
 
 
 function onDocumentKeydown(evt) {
@@ -19,7 +44,7 @@ function onDocumentKeydown(evt) {
     return;
   }
 
-  if (!document.querySelector('.error.hidden')) {
+  if (document.querySelector('.error')) {
     return;
   }
 
@@ -53,24 +78,41 @@ uploadInput.addEventListener('change', openUploadForm);
 uploadCancelBtn.addEventListener('click', closeUploadForm);
 
 const showFormError = function () {
-  showModal('.error', '.error__button');
+  showModal('error');
 };
 
 const showFormSuccess = function(){
   closeUploadForm();
-  showModal('.success', '.success__button');
+  showModal('success');
 };
+
+const submitButton = uploadForm.querySelector('.img-upload__submit');
 
 export const setUserFormSubmit = (onSuccess, onFail) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
 
+    submitButton.disabled = true;
+
     if (isValid) {
       const formData = new FormData(evt.target);
-      sendData(formData).then(onSuccess).catch(onFail);
+      sendData(formData).then(onSuccess).catch(onFail).finally(() => {
+        submitButton.disabled = false;
+      });
     }
   });
 };
+
+hashtagInput.addEventListener('input', () => {
+  pristine.validate();
+  submitButton.disabled = !pristine.validate();
+});
+
+commentInput.addEventListener('input', () => {
+  pristine.validate();
+  submitButton.disabled = !pristine.validate();
+});
+
 
 setUserFormSubmit(showFormSuccess, showFormError);
